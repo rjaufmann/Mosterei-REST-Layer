@@ -1,13 +1,13 @@
 package de.jaufmann.mosterei.model;
 
 import de.jaufmann.mosterei.util.LocalISO8601TimestampAttributeConverter;
-import de.jaufmann.mosterei.util.LocalTimestampAttributeConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Entity
@@ -24,13 +24,11 @@ public class Anmeldungen implements Serializable {
 
     @NotBlank
     @Column(name = "beginn", nullable = false)
-    @Convert(converter = LocalTimestampAttributeConverter.class)
-    private Timestamp beginn;
+    private Date beginn;
 
     @NotBlank
     @Column(name = "finish", nullable = false)
-    @Convert(converter = LocalTimestampAttributeConverter.class)
-    private Timestamp finish;
+    private Date finish;
 
     @Column(name = "created_on")
     @Convert(converter = LocalISO8601TimestampAttributeConverter.class)
@@ -89,19 +87,19 @@ public class Anmeldungen implements Serializable {
         this.id = id;
     }
 
-    public Timestamp getBeginn() {
+    public Date getBeginn() {
         return beginn;
     }
 
-    public void setBeginn(Timestamp beginn) {
+    public void setBeginn(Date beginn) {
         this.beginn = beginn;
     }
 
-    public Timestamp getFinish() {
+    public Date getFinish() {
         return finish;
     }
 
-    public void setFinish(Timestamp finish) {
+    public void setFinish(Date finish) {
         this.finish = finish;
     }
 
@@ -194,7 +192,13 @@ public class Anmeldungen implements Serializable {
     }
 
     public String getAbfuellung() {
-        return abfuellung;
+
+        if (saftart.equals("SM")) {
+            return abfuellung;
+        }
+        else {
+            return "-";
+        }
     }
 
     public void setAbfuellung(String abfuellung) {
