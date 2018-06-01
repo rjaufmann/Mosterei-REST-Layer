@@ -5,6 +5,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "kunden")
@@ -32,7 +33,7 @@ public class Kunden  implements Serializable {
   private String fullName;
 
   @Column(name = "CREATED_ON")
-  private String createdOn;
+  private Date createdOn;
 
   @Column(name = "PHONE")
   private String phone;
@@ -83,11 +84,11 @@ public class Kunden  implements Serializable {
     this.fullName = fullName;
   }
 
-  public String getCreatedOn() {
+  public Date getCreatedOn() {
     return createdOn;
   }
 
-  public void setCreatedOn(String createdOn) {
+  public void setCreatedOn(Date createdOn) {
     this.createdOn = createdOn;
   }
 

@@ -1,6 +1,5 @@
 package de.jaufmann.mosterei.model;
 
-import de.jaufmann.mosterei.util.LocalISO8601TimestampAttributeConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -31,7 +30,6 @@ public class Anmeldungen implements Serializable {
     private Date finish;
 
     @Column(name = "created_on")
-    @Convert(converter = LocalISO8601TimestampAttributeConverter.class)
     private Timestamp createdOn;
 
     @NotBlank
@@ -42,7 +40,6 @@ public class Anmeldungen implements Serializable {
     private String createdBy;
 
     @Column(name = "updated_on")
-    @Convert(converter = LocalISO8601TimestampAttributeConverter.class)
     private Timestamp updatedOn;
 
     @Column(name = "status_message")
