@@ -1,11 +1,14 @@
 package de.jaufmann.mosterei.model;
 
+import de.jaufmann.mosterei.util.AbfuellungConverter;
+import de.jaufmann.mosterei.util.SaftartConverter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -64,11 +67,13 @@ public class Anmeldungen implements Serializable {
 
     @NotBlank
     @Column(name = "SAFTART")
-    private String saftart;
+    @Convert(converter = SaftartConverter.class)
+    private String[] saftart;
 
     @NotBlank
     @Column(name = "ABFUELLUNG")
-    private String abfuellung;
+    @Convert(converter = AbfuellungConverter.class)
+    private String[] abfuellung;
 
     @Column(name = "MITGLIED")
     private String mitglied;
@@ -180,25 +185,27 @@ public class Anmeldungen implements Serializable {
         this.angemeldeteMenge = angemeldeteMenge;
     }
 
-    public String getSaftart() {
+    public String[] getSaftart() {
         return saftart;
     }
 
-    public void setSaftart(String saftart) {
+    public void setSaftart(String[] saftart) {
         this.saftart = saftart;
     }
 
-    public String getAbfuellung() {
+    public String[] getAbfuellung() {
 
-        if (saftart.equals("SM")) {
+        if (Arrays.asList(saftart).contains("SM")) {
             return abfuellung;
         }
         else {
-            return "-";
+            String[] stringArray = new String[1];
+            stringArray[0] = "-";
+            return stringArray;
         }
     }
 
-    public void setAbfuellung(String abfuellung) {
+    public void setAbfuellung(String[] abfuellung) {
         this.abfuellung = abfuellung;
     }
 
