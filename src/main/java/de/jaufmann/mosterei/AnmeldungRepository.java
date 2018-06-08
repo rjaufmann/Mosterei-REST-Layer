@@ -9,9 +9,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import de.jaufmann.mosterei.model.Anmeldungen;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional
 public interface AnmeldungRepository extends JpaRepository<Anmeldungen, Long> {
 
     @Query(value = "SELECT * FROM anmeldungen a where a.beginn BETWEEN :start AND :ende", nativeQuery = true)

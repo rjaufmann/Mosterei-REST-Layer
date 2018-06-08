@@ -13,10 +13,10 @@ public class AbfuellungConverter implements AttributeConverter<String[], String>
     public String convertToDatabaseColumn(String[] abfuellungArray) {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<abfuellungArray.length; i++) {
-            sb.append(abfuellungArray[i]);
-            if (i<abfuellungArray.length) {
+            if (i != 0) {
                 sb.append(SEPARATOR);
             }
+            sb.append(abfuellungArray[i]);
         }
 
         return sb.toString();

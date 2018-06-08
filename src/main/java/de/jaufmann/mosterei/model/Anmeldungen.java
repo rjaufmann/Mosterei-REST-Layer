@@ -6,6 +6,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -20,24 +23,24 @@ public class Anmeldungen implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @NotBlank
+    @NotNull
     @Column(name = "id", updatable = false, nullable = false)
     private long id;
 
-    @NotBlank
+    @NotNull
     @Column(name = "beginn", nullable = false)
     private Date beginn;
 
-    @NotBlank
+    @NotNull
     @Column(name = "finish", nullable = false)
     private Date finish;
 
     @Column(name = "created_on")
     private Timestamp createdOn;
 
-    @NotBlank
+    @NotNull
     @Column(name = "user_id", nullable = false)
-    private long userId;
+    private Long userId;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -65,12 +68,12 @@ public class Anmeldungen implements Serializable {
     @Column(name = "angemeldete_menge")
     private String angemeldeteMenge;
 
-    @NotBlank
+    @NotEmpty
     @Column(name = "SAFTART")
     @Convert(converter = SaftartConverter.class)
     private String[] saftart;
 
-    @NotBlank
+    @NotEmpty
     @Column(name = "ABFUELLUNG")
     @Convert(converter = AbfuellungConverter.class)
     private String[] abfuellung;
@@ -113,11 +116,11 @@ public class Anmeldungen implements Serializable {
         this.createdOn = createdOn;
     }
 
-    public long getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

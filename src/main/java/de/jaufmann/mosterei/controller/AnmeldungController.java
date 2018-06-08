@@ -5,19 +5,15 @@ import de.jaufmann.mosterei.ResourceNotFoundException;
 import de.jaufmann.mosterei.model.Anmeldungen;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.*;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(path="/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AnmeldungController {
 
     private static final Logger logger = Logger.getLogger(AnmeldungController.class.getName());
@@ -77,5 +73,12 @@ public class AnmeldungController {
         }
 
         return alleAnmeldungen;
+    }
+
+    @PostMapping(path = "/update_anmeldungen", consumes =  MediaType.APPLICATION_JSON_VALUE)
+    public Anmeldungen updateAnmeldung(@RequestBody Anmeldungen anmeldungen) {
+        logger.log(Level.INFO, "updateAnmeldung called: " + anmeldungen.toString());
+        logger.log(Level.INFO, "userID: " + anmeldungen.getUserId());
+        return anmeldungRepository.save(anmeldungen);
     }
 }

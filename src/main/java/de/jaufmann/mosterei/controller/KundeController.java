@@ -2,14 +2,14 @@ package de.jaufmann.mosterei.controller;
 
 import de.jaufmann.mosterei.KundeRepository;
 import de.jaufmann.mosterei.ResourceNotFoundException;
+import de.jaufmann.mosterei.model.Anmeldungen;
 import de.jaufmann.mosterei.model.Kunden;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
@@ -32,5 +32,11 @@ public class KundeController {
     public Kunden getNoteById(@PathVariable(value = "id") Long id) {
         return kundeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Kunden", "ID", id));
+    }
+
+    @PostMapping(path = "/update_kunde", consumes =  MediaType.APPLICATION_JSON_VALUE)
+    public Kunden updateKunde(@RequestBody Kunden kunde) {
+        logger.log(Level.INFO, "updateKunde called: " + kunde.toString());
+        return kundeRepository.save(kunde);
     }
 }

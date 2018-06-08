@@ -3,6 +3,7 @@ package de.jaufmann.mosterei.model;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,6 +16,7 @@ public class Kunden  implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
+  @NotNull
   @Column(name = "ID", updatable = false, nullable = false)
   private long id;
 
@@ -24,11 +26,12 @@ public class Kunden  implements Serializable {
   @Column(name = "EMAIL")
   private String email;
 
-  @NotNull
+  @NotEmpty
   @Column(name = "NAME", nullable = false)
   private String name;
 
-  @NotNull
+  @NotEmpty
+
   @Column(name = "FULL_NAME", nullable = false)
   private String fullName;
 

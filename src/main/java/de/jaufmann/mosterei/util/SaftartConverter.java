@@ -13,10 +13,10 @@ public class SaftartConverter implements AttributeConverter<String[], String> {
     public String convertToDatabaseColumn(String[] saftArtArray) {
         StringBuilder sb = new StringBuilder();
         for (int i=0; i<saftArtArray.length; i++) {
-            sb.append(saftArtArray[i]);
-            if (i<saftArtArray.length) {
+            if (i != 0) {
                 sb.append(SEPARATOR);
             }
+            sb.append(saftArtArray[i]);
         }
 
         return sb.toString();
