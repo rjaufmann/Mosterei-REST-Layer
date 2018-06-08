@@ -35,8 +35,9 @@ public class KundeController {
     }
 
     @PostMapping(path = "/update_kunde", consumes =  MediaType.APPLICATION_JSON_VALUE)
-    public Kunden updateKunde(@RequestBody Kunden kunde) {
+    public void updateKunde(@RequestBody Kunden kunde) {
         logger.log(Level.INFO, "updateKunde called: " + kunde.toString());
-        return kundeRepository.save(kunde);
+        kundeRepository.save(kunde);
+        return;
     }
 }

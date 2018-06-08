@@ -84,6 +84,9 @@ public class Anmeldungen implements Serializable {
     @Column(name = "BEMERKUNG")
     private String bemerkung;
 
+    @Column(name = "mosten_id")
+    private Long mostenId;
+
     public long getId() {
         return id;
     }
@@ -228,4 +231,12 @@ public class Anmeldungen implements Serializable {
         this.bemerkung = bemerkung;
     }
 
+
+    public Long getMostenId() {
+        return mostenId;
+    }
+
+    public void setMostenId(Long mostenId) {
+        this.mostenId = mostenId;
+    }
 }

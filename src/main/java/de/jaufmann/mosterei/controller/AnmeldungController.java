@@ -76,9 +76,10 @@ public class AnmeldungController {
     }
 
     @PostMapping(path = "/update_anmeldungen", consumes =  MediaType.APPLICATION_JSON_VALUE)
-    public Anmeldungen updateAnmeldung(@RequestBody Anmeldungen anmeldungen) {
+    public void updateAnmeldung(@RequestBody Anmeldungen anmeldungen) {
         logger.log(Level.INFO, "updateAnmeldung called: " + anmeldungen.toString());
         logger.log(Level.INFO, "userID: " + anmeldungen.getUserId());
-        return anmeldungRepository.save(anmeldungen);
+        anmeldungRepository.save(anmeldungen);
+        return;
     }
 }
